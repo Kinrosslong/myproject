@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/demo', 'DemoController@demo');
+
+// Route::get('/demo', function () {
+//     // return view('welcome');
+//     echo 7908;
+// });
