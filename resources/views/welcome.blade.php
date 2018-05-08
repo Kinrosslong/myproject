@@ -26,7 +26,7 @@
         <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
             <span><a href="" class="blog-color">article&nbsp;</a></span>
             <span>@Kinross &nbsp;</span>
-            <span>2018/4/10</span>
+            <span>2018/5/9</span>
             <h1><a href="">世间所有的相遇，都是久别重逢。</a></h1>
             <p>你可以选择在原处不停地跟周遭不解的人解释你为何这么做，让他们理解你，你可以选择什么都不讲，自顾自往前走。
             </p>
