@@ -11,7 +11,7 @@
         <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
             <span><a href="" class="blog-color">article &nbsp;</a></span>
             <span> @Kinross &nbsp;</span>
-            <span>2018/4/10</span>
+            <span>2018/5/8</span>
             <h1><a href="">我本楚狂人，凤歌笑孔丘</a></h1>
             <p>我们一直在坚持着，不是为了改变这个世界，而是希望不被这个世界所改变。
             </p>
