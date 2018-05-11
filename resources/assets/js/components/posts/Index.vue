@@ -1,11 +1,11 @@
 <template>
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12 col-sm-12 col-xs-1">
                 <div class="panel panel-default">
 
                     <div class="panel-heading">Laravel axios 请求 文章首页列表</div>
                     <div class="panel-body">
-                        <div v-for="post in posts"  :key="post.id" class="bs-callout bs-callout-danger ">
+                        <div v-for="post in lists"  :key="post.id" class="bs-callout bs-callout-danger ">
                             <h4><router-link :to="{name:'posts', params:{id: post.id}}">{{post.title}}</router-link></h4>
                             <p>{{post.body}}</p>
                         </div>
@@ -17,34 +17,37 @@
                             <thead>
                                 <tr >
                                     <th>ID </th>
-                                    <th>用户ID</th>
                                     <th>标题</th>
                                     <th>内容</th>
                                     <th>创建时间</th>
                                     <th>操作 </th>
                                 </tr>
                             </thead>
-                            <tbody id="table-list">
-                                <tr v-for="post in posts" :key="post.id" >
-                                    <td>{{post.id}}</td>
-                                    <td>{{post.user_id}}</td>
-                                    <td>{{post.title}}</td>
-                                    <td>{{post.body}}</td>
-                                    <td>{{post.created_at}}</td>
+                            <tbody id="table-list" v-if="lists.length > 0">
+                                <tr v-for="list in lists" :key="list.id" >
+                                    <td>{{list.id}}</td>
+                                    <td class="col-md-2 col-sm-2 col-xs-2">{{list.title}}</td>
+                                    <td>{{list.content}}</td>
+                                    <td>{{list.created_at}}</td>
                                     <td>
                                         <button type="button" class="btn btn-success" @click="dialogFormVisible = true">编辑</button>
                                         <button type="button" class="btn btn-danger">删除</button>
-
                                         <!-- <el-button type="primary">这是element按钮上传</el-button> -->
                                     </td>
                                 </tr>
                             </tbody>
+                            <tbody v-else>
+                                <tr>
+                                    <td colspan="5">暂无数据</td>
+                                </tr>
+                            </tbody>
                         </table>
+                        
 
                         <!--Element 表格渲染-->
                         <!--分页-->
-                        <el-pagination background layout="total, prev, pager, next, jumper"  :total="total"   :page-size="pagesize"  
-                            @size-change="initShow" 
+                        <el-pagination background layout="total, prev, pager, next, jumper"  :total="total"   :page-size="pagesize"
+                            @size-change="initShow"
                             @current-change="initShow">
                         </el-pagination>
 
@@ -85,15 +88,15 @@
     }
 </style>
 <script>
-    import Posts from './../posts/Index.vue';
+    // import Posts from './../posts/Index.vue';
     export default {
 
-        components: {
-            Posts
-        },
+        // components: {
+        //     Posts
+        // },
         data() {
             return {
-                posts: [],
+                lists: [],
                 radio: '1',
                 input: '123',
                 switch1: true,
@@ -124,10 +127,10 @@
             },
             //初始化
             initShow(pagenum) {
-                axios.get('/api/posts',{params:{pagenum:pagenum, pagesize:this.pagesize}}).then(res => {
+                axios.get('/api/acticleInit',{params:{pagenum:pagenum, pagesize:this.pagesize}}).then(res => {
                     console.log(res);
                     this.total = res.data.total;
-                    this.posts = res.data.data;
+                    this.lists = res.data.list;
                 })
             },
             edit() {

@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import JWTToken from './../../helpers/jwt';
+    // import JWTToken from './../../helpers/jwt';
     export default {
         data() {
             return {
@@ -45,21 +45,21 @@
       
         methods: {
 
-            login() {
-                let formData = {
-                    client_id: '2',
-                    client_secret: 'SIIZDXbL843mCClHO7mVhg7vNhUJiglp1fwtcp92',
-                    grant_type: 'password',
-                    scope: '',
-                    username: this.email,
-                    password: this.password,
-                }
+            // login() {
+            //     let formData = {
+            //         client_id: '2',
+            //         client_secret: 'SIIZDXbL843mCClHO7mVhg7vNhUJiglp1fwtcp92',
+            //         grant_type: 'password',
+            //         scope: '',
+            //         username: this.email,
+            //         password: this.password,
+            //     }
                
-                axios.post('/oauth/token', formData).then(res => {
-                    JWTToken.setToken(res.data.access_token);
-                    console.log(res.data);
-                });
-            },
+            //     axios.post('/oauth/token', formData).then(res => {
+            //         JWTToken.setToken(res.data.access_token);
+            //         console.log(res.data);
+            //     });
+            // },
         }
     }
 </script>                        

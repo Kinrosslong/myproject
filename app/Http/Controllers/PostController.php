@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tumi
- * Date: 2018/5/11
- * Time: 16:04
- */
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,28 +6,33 @@ use App\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\ValidationException;
 use Exception;
-
-class ArticleController extends Controller
+use App\Http\Requests\StoreBlogPost;
+class PostController extends Controller
 {
     public function index(Request $request)
-    {
+    {   
+        // return ['123','456'];
+        // $users = DB::select('select * from posts');
+        // $user = DB::select('select * from post where status = ?', [10]); //这样是有占位符的 比较安全 参数绑定可以避免 SQL 注入攻击
+        // $user = DB::select('select * from post where status = :status', ['status' => 1]);
+        // dd($users);
         $pagesize = $request->input('pagesize');
         $pagenum = $request->input('pagenum');
         $num = ($pagenum - 1) * $pagesize;
         $articlesList = DB::table('articles')->offset($num)->limit($pagesize)->get(); // get 方法获取表中所有记录
-        $total = DB::table('articles')->count();
-        return ['list' => $articlesList, 'total' => $total];
+        $count = DB::table('articles')->count();
+        return ['list' => $articlesList, 'count' => $count];
     }
     public function show()
     {
         // return $post;
         return response()->json($exception->errors(), $exception->status);
     }
-    public function demo()
+    public function demo() 
     {
         // echo 456;
         $users = DB::select('select * from posts');
-        $users = DB::table('posts')->get();
+        $users = DB::table('posts')->get(); 
         dd($users);
         return $users;
     }
@@ -48,7 +46,7 @@ class ArticleController extends Controller
         return [
             'title.required' => '不能为空',
             'body.required'  => '不能为空',
-            'name.required' => '不能为空',
+            'name.required' => '不能为空', 
         ];
     }
     /**
@@ -58,7 +56,7 @@ class ArticleController extends Controller
      * @return array
      */
     public function verify(StoreBlogPost $request)
-    {
+    {    
         return response()->json([
             'success' => true,
             'status' => 200,
@@ -78,8 +76,8 @@ class ArticleController extends Controller
      */
     public function register(Request $request)
     {
-
-
+        
+        
         // return response()->json([
         //     'success' => true,
         //     'status' => 200,
@@ -106,5 +104,5 @@ class ArticleController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
-
+    
 }

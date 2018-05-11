@@ -21,3 +21,12 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+//
+//$factory->define(App\Article::class, function (Faker $faker) {
+//    return [
+//        'category_id' => $faker->numberBetween(),
+//        'title' => $faker->title,
+//        'content' => $faker->paragraph
+//    ];
+//});

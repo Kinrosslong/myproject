@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::get('/posts', 'PostController@index'); //post请求
+Route::get('/acticleInit', 'ArticleController@index'); //首页初始化get请求

@@ -15,9 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', function () {
-    return view('layouts.admin');
-});
+// Route::get('admin', function () {
+//     return view('layouts.admin');
+// });
+
+//去掉vue#号 匹配所有的字符串路由后台路由可以由后台写死配置
+Route::any('{all}', function () {
+    return view('layouts.admin'); //路由指向 vue布局文件
+})->where(['all' => '.*']);
 
 Route::get('/demo', 'DemoController@demo');
 

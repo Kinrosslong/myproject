@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-    
         <posts></posts>
     </div>
 </template>
