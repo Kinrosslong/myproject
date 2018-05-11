@@ -7,7 +7,7 @@
                     <div class="panel-body">
                         <div v-for="post in lists"  :key="post.id" class="bs-callout bs-callout-danger ">
                             <h4><router-link :to="{name:'posts', params:{id: post.id}}">{{post.title}}</router-link></h4>
-                            <p>{{post.body}}</p>
+                            <p>{{post.content}}</p>
                         </div>
                     </div>
 

@@ -37380,7 +37380,7 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(post.body))])
+                _c("p", [_vm._v(_vm._s(post.content))])
               ]
             )
           })
