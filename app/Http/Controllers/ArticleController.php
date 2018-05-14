@@ -51,6 +51,7 @@ class ArticleController extends Controller
             'name.required' => '不能为空',
         ];
     }
+
     /**
      * Get the validation rules that apply to the request.
      * 测试验证规则 获取应用于请求的验证规则。
@@ -65,6 +66,7 @@ class ArticleController extends Controller
             'msg' => 'ok'
         ]);
     }
+
     public function about( )
     {
 //        Request::

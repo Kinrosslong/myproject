@@ -13,7 +13,7 @@ class CreateArticleTable extends Migration
      */
     public function up()
     {
-        Schema::create('article', function (Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id')->unsigned()->default(0)->comment('分类id');
             $table->string('title')->comment('标题');
@@ -30,6 +30,6 @@ class CreateArticleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('acticle');
+        Schema::dropIfExists('acticles');
     }
 }
