@@ -25,11 +25,22 @@ class ArticleController extends Controller
         $total = DB::table('articles')->count();
         return ['list' => $articlesList, 'total' => $total];
     }
+
+    /*
+     *
+     *
+    */
+    protected function getInt(string $num, array $firstname)
+    {
+
+    }
+
     public function show()
     {
         // return $post;
         return response()->json($exception->errors(), $exception->status);
     }
+
     public function demo()
     {
         // echo 456;

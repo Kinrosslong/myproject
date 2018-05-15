@@ -22,11 +22,11 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
-//
-//$factory->define(App\Article::class, function (Faker $faker) {
-//    return [
-//        'category_id' => $faker->numberBetween(),
-//        'title' => $faker->title,
-//        'content' => $faker->paragraph
-//    ];
-//});
+
+$factory->define(App\Models\Article::class, function (Faker $faker) {
+    return [
+        'category_id' => $faker->numberBetween(1,9),
+        'title' => $faker->sentence,
+        'content' => $faker->paragraph
+    ];
+});
