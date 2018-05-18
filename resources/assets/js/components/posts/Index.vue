@@ -31,7 +31,7 @@
                                     <td>{{list.created_at}}</td>
                                     <td>
                                         <button type="button" class="btn btn-success" @click="dialogFormVisible = true">编辑</button>
-                                        <button type="button" class="btn btn-danger">删除</button>
+                                        <button type="button" class="btn btn-danger" @click="del(list.id)" >删除</button>
                                         <!-- <el-button type="primary">这是element按钮上传</el-button> -->
                                     </td>
                                 </tr>
@@ -144,7 +144,35 @@
                 //vue 路由地址跳转  name 就是 routes.js里面的路由方法名称
                 this.$router.push({name: postEdit});
                 console.log();
-            }
+            },
+            eventdel(item) {
+                if(item) {
+                    this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', id, {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                        }).then(() => {
+                            this.confirmDel(id);
+                    }).catch(() => {
+                            this.$message({
+                            type: 'info',
+                            message: '已取消删除'
+                        });
+                    });
+                } else {
+                    this.$message.error('参数不能为空');
+                }
+
+            },
+            del(item) {
+                axios.post('/api/acticleDel',{id:item}).then(res => {
+                    console.log(res);
+                    if(res.data.id) {
+                        this.initShow(1);
+                    }
+                });
+            },
+
         }
 
     }

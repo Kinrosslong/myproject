@@ -2,7 +2,7 @@ import VueRouter from 'vue-router'
 
 let routes = [
     {
-        path: '/admin',
+        path: '/admin/index',
         component: require('./components/pages/Home')
     },
     {
@@ -37,7 +37,10 @@ let routes = [
         name: 'login',
         component: require('./components/login/Login.vue')
     },
-
+    { //阻止没有用的url地址 报错404
+        path: "*",
+        component: require('./components/pages/404')
+    },
 ]
 export default new VueRouter({
     mode: 'history', //这里是去掉vue路由#号

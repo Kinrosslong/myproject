@@ -21,7 +21,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Article::class, function (Faker $faker) {
     return [
-        'category_id' => $faker->numberBetween(1,2),
+        'category_id' => $faker->numberBetween(1,9),
         'title' => $faker->sentence,
         'content' => $faker->paragraph
     ];

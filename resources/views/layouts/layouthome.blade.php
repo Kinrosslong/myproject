@@ -158,7 +158,7 @@
             </p>
         </div>
     </div>    
-    <div class="blog-text-center">Copyright© 2018. Kinross &nbsp; <span>粤ICP备18048135号</span></div>
+    <div class="blog-text-center">Copyright© {{ $time }}. Kinross &nbsp; <span>粤ICP备18048135号</span></div>
         
     </div>
     @show

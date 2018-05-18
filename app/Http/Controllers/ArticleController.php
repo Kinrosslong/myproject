@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Auth\Events\Registered;
@@ -26,13 +27,34 @@ class ArticleController extends Controller
         return ['list' => $articlesList, 'total' => $total];
     }
 
+    /**
+     * @desc 文章删除
+     * @param string id
+     * @return json
+     */
+    public function articleDel(Request $request)
+    {
+        $id = $request->input('id');
+        $qid = $request->query('id');
+//        if(empty($id)) {
+////            return
+//        }
+        dump($id);
+        dd($id);
+        dump($qid);
+        dd($qid);
+
+        $res = Db::table('articles')->where(['id' => $id])->delete();
+        return ['id' => $res];
+    }
+
     /*
      *
      *
     */
     protected function getInt(string $num, array $firstname)
     {
-
+        return ['1' => 123, 'message' => 'test'];
     }
 
     public function show()
@@ -118,6 +140,17 @@ class ArticleController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * @desc 路由学习
+     *
+     */
+    public function route()
+    {
+//        return view('route');
+//        return view('welcome');
+        return redirect('/');
     }
 
 }
