@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <meta name="keywords" content="kinross 博客">
+  <meta name="description" content="这是kinross个人的博客 ">>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Kinross 随笔记</title>
   <meta name="renderer" content="webkit">
