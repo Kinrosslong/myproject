@@ -11,7 +11,7 @@ let routes = [
     },
     {
         path: '/admin/about',
-        component: require('./components/pages/About')
+        component: require('./components/pages/About.vue')
     },
     // {
     //     path: '/demo',
@@ -20,12 +20,12 @@ let routes = [
     {
         path: '/post/:id',
         name: 'posts',
-        component: require('./components/posts/Post')
+        component: require('./components/posts/Post.vue')
     },
     {
         path: '/admin/regist',
         name: 'regist',
-        component: require('./components/register/Register')
+        component: require('./components/register/Register.vue')
     },
     // {
     //     path: '/email',
@@ -37,10 +37,13 @@ let routes = [
         name: 'login',
         component: require('./components/login/Login.vue')
     },
-    { //阻止没有用的url地址 报错404
+
+    { //阻止没有用的url地址 报错404 要一定放置最后
         path: "*",
-        component: require('./components/pages/404')
+        component: require('./components/pages/404.vue')
     },
+    // { path: '*', redirect: './components/pages/404.vue', hidden: true },
+
 ]
 export default new VueRouter({
     mode: 'history', //这里是去掉vue路由#号
