@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::get('/posts', 'PostController@index'); //post请求
 Route::get('/acticleInit', 'ArticleController@index'); //首页初始化get请求
 Route::post('/acticleDel', 'ArticleController@articleDel'); //删除
+Route::get('/acticleList', 'Admin\ArticleController@acticleList'); //前后分离测试数据
