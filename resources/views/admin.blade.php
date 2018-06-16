@@ -11,7 +11,6 @@
 </head>
 <body>
     <div id=app>
-    <p style="color:red"></p>
 </div>
     <script type=text/javascript src=./static/js/manifest.8eb9069a8661a9e4a8f2.js></script>
     <script type=text/javascript src=./static/js/vendor.d935eb6e57d9c3a3b8f4.js></script>
