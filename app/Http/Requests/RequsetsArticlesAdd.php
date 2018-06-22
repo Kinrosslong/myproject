@@ -25,7 +25,7 @@ class RequsetsArticlesAdd extends FormRequest
     {
         return [
             'title' => 'required|unique:articles|max:55',
-            'content' => 'required',
+            'content' => 'required|max:255',
         ];
     }
 
@@ -37,6 +37,7 @@ class RequsetsArticlesAdd extends FormRequest
     {
         return [
             'title.required' => '必填项,不能为空',
+            'title.unique' => '标题已经被采纳了',
             'content.required'  => '必填项,不能为空',
         ];
     }

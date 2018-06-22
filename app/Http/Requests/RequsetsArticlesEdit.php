@@ -26,7 +26,7 @@ class RequsetsArticlesEdit extends FormRequest
         return [
             'id' => 'required',
             'title' => 'required|max:55',
-            'content' => 'required',
+            'content' => 'required|max:255',
         ];
     }
 
