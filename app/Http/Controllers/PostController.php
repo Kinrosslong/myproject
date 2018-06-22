@@ -104,5 +104,6 @@ class PostController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
     
 }
