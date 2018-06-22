@@ -66,45 +66,45 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($request->is('api/*')) {
-
-            // 模型里面的数据找不到会报错404
-            if ($exception instanceof ModelNotFoundException) {
-                $e = new NotFoundHttpException($exception->getMessage(), $exception);
-                return response()->json([
-                    'statusCode'=> $e->getStatusCode(),
-                    'msg' => $e->getMessage(),
-                    'data' => [],
-                ],$e->getStatusCode());
-            }
-
-            // 404 请求资源不存在
-            if($exception instanceof NotFoundHttpException) {
-                return response()->json([
-                    'statusCode'=> $exception->getStatusCode(),
-                    'msg' => 'Not Found',
-                    'data' => []
-                ], $exception->getStatusCode());
-            }
-
-            // 403 没有权限 用户认证通过但是没有权限执行该操作
-            if($exception instanceof AuthorizationException) {
-                return response()->json([
-                    'statusCode'=> 403,
-                    'msg' => '未经授权的.',
-                    'data' => []
-                ], 403);
-            }
-
-            //捕获CSRF TOKEN失效异常
-            if ($exception instanceof TokenMismatchException) {
-                return response()->json([
-                    'statusCode' => 419,
-                    'msg' => 'No operation for a long time!<br>This page need to refresh!',
-                    'data' => []
-                ], 419);
-            }
-        }
+//        if($request->is('api/*')) {
+//
+//            // 模型里面的数据找不到会报错404
+//            if ($exception instanceof ModelNotFoundException) {
+//                $e = new NotFoundHttpException($exception->getMessage(), $exception);
+//                return response()->json([
+//                    'statusCode'=> $e->getStatusCode(),
+//                    'msg' => $e->getMessage(),
+//                    'data' => [],
+//                ],$e->getStatusCode());
+//            }
+//
+//            // 404 请求资源不存在
+//            if($exception instanceof NotFoundHttpException) {
+//                return response()->json([
+//                    'statusCode'=> $exception->getStatusCode(),
+//                    'msg' => 'Not Found',
+//                    'data' => []
+//                ], $exception->getStatusCode());
+//            }
+//
+//            // 403 没有权限 用户认证通过但是没有权限执行该操作
+//            if($exception instanceof AuthorizationException) {
+//                return response()->json([
+//                    'statusCode'=> 403,
+//                    'msg' => '未经授权的.',
+//                    'data' => []
+//                ], 403);
+//            }
+//
+//            //捕获CSRF TOKEN失效异常
+//            if ($exception instanceof TokenMismatchException) {
+//                return response()->json([
+//                    'statusCode' => 419,
+//                    'msg' => 'No operation for a long time!<br>This page need to refresh!',
+//                    'data' => []
+//                ], 419);
+//            }
+//        }
 
         return parent::render($request, $exception);
     }
@@ -114,29 +114,29 @@ class Handler extends ExceptionHandler
      * @param  string
      * @return  json
      */
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        return response()->json([
-            'statusCode'=> 401,
-            'msg' => $exception->getMessage(),
-            'data' => []
-        ], 401);
-    }
+//    protected function unauthenticated($request, AuthenticationException $exception)
+//    {
+//        return response()->json([
+//            'statusCode'=> 401,
+//            'msg' => $exception->getMessage(),
+//            'data' => []
+//        ], 401);
+//    }
 
     /**
      * @Notes:  422 验证那边的规则报错 只有验证规则才有errors
      * @param  string
      * @return  json
      */
-    protected function invalidJson($request, ValidationException $exception)
-    {
-        return response()->json([
-            'statusCode'=> $exception->status,
-            'msg' => $exception->getMessage(),
-            'errors' => $exception->errors(),
-            'data' => []
-        ], $exception->status);
-    }
+//    protected function invalidJson($request, ValidationException $exception)
+//    {
+//        return response()->json([
+//            'statusCode'=> $exception->status,
+//            'msg' => $exception->getMessage(),
+//            'errors' => $exception->errors(),
+//            'data' => []
+//        ], $exception->status);
+//    }
 
 
     /**
@@ -146,15 +146,15 @@ class Handler extends ExceptionHandler
      * @param  \Exception $e
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function prepareJsonResponse($request, Exception $e)
-    {
-        $status = $this->isHttpException($e) ? $e->getStatusCode() : 500;
-
-        return response()->json([
-            'statusCode'=> $status,
-            'msg' => $e->getMessage(),
-            'data' => []
-        ], $status);
-    }
+//    protected function prepareJsonResponse($request, Exception $e)
+//    {
+//        $status = $this->isHttpException($e) ? $e->getStatusCode() : 500;
+//
+//        return response()->json([
+//            'statusCode'=> $status,
+//            'msg' => $e->getMessage(),
+//            'data' => []
+//        ], $status);
+//    }
 
 }
