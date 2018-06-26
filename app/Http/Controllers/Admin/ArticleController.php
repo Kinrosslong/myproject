@@ -31,16 +31,12 @@ class ArticleController extends Controller
                 ['title', 'like' , $selectWord.'%']
             ];
         }
-
-//        DB::enableQueryLog();
         $articlesList = Article::where($where)
             ->offset($num)
             ->limit($pagesize)
             ->orderBy('created_at', 'desc')
             ->get(); // get 方法获取表中所有记录
         $total = Article::where($where)->count();
-//        $sql = DB::getQueryLog();
-//        $articlesList = ['id'=> 1, 'title' => '123465', 'content']
         return response()->json([
             'code'=> 0,
             'msg' => 'ok',
@@ -111,10 +107,10 @@ class ArticleController extends Controller
         //        if(empty($id)) {
         ////            return
         //        }
-        dump($id);
-        dd($id);
-        dump($qid);
-        dd($qid);
+//        dump($id);
+//        dd($id);
+//        dump($qid);
+//        dd($qid);
 
         $res = Db::table('articles')->where(['id' => $id])->delete();
         return ['id' => $res];
