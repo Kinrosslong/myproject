@@ -25,8 +25,8 @@ class RequsetsArticlesEdit extends FormRequest
     {
         return [
             'id' => 'required',
-            'title' => 'required|max:55',
-            'content' => 'required|max:255',
+            'title' => 'required|max:55|min:5',
+            'content' => 'required|max:255|min:5',
         ];
     }
 
@@ -39,7 +39,11 @@ class RequsetsArticlesEdit extends FormRequest
         return [
             'id.required' => '文章索引ID不能为空',
             'title.required' => '必填项,不能为空',
+            'title.max' => '文章标题不能大于55个字符',
             'content.required'  => '必填项,不能为空',
+            'content.max' => '内容不超过255个字符',
+            'content.min' => '文章内容不能小于5个字符',
+            'title.min' => '文章标题不能小于于5个字符',
         ];
     }
 }

@@ -21,4 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/acticleInit', 'ArticleController@index'); //首页初始化get请求
 Route::post('/acticleDel', 'ArticleController@articleDel'); //删除
 Route::get('/acticleList', 'Admin\ArticleController@index'); //前后分离测试数据
-Route::post('/saveEdit', 'Admin\ArticleController@saveEdit'); //文章编辑
+Route::post('/articleEdit', 'Admin\ArticleController@articleEdit'); //文章编辑
+Route::post('/articleAdd', 'Admin\ArticleController@articleAdd'); //文章编辑
