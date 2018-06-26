@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\RequsetsArticlesEdit;
 use App\Http\Requests\RequsetsArticlesAdd;
+use App\Models\Article;
 
 class ArticleController extends Controller
 {
@@ -20,8 +21,8 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $pagesize = $request->input('pagesize');
-        $pagenum = $request->input('pagenum');
+        $pagesize = $request->input('pagesize', 5);
+        $pagenum = $request->input('pagenum', 1);
         $selectWord = $request->input('select_word');
         $num = ($pagenum - 1) * $pagesize;
         $where = [];
@@ -32,14 +33,70 @@ class ArticleController extends Controller
         }
 
 //        DB::enableQueryLog();
-        $articlesList = DB::table('articles')
-            ->where($where)
+        $articlesList = Article::where($where)
             ->offset($num)
             ->limit($pagesize)
+            ->orderBy('created_at', 'desc')
             ->get(); // get 方法获取表中所有记录
-        $total = DB::table('articles')->where($where)->count();
+        $total = Article::where($where)->count();
 //        $sql = DB::getQueryLog();
-        return ['list' => $articlesList, 'total' => $total];
+//        $articlesList = ['id'=> 1, 'title' => '123465', 'content']
+        return response()->json([
+            'code'=> 0,
+            'msg' => 'ok',
+            'data' => ['list' => $articlesList, 'total' =>   $total]
+        ]);
+    }
+
+
+    /**
+     * @Notes: 文章添加
+     * @param  string id
+     * @param  string title 标题
+     * @param string content 内容
+     * @return  json
+     */
+    public function articleAdd(RequsetsArticlesAdd $request)
+    {
+       $models =  new Article();
+       $res = $models->add($request->all());
+       if($res) {
+           return response()->json([
+               'code'=> 0,
+               'msg' => '添加成功',
+               'data' => []
+           ]);
+       }
+        return response()->json([
+            'code'=> -1,
+            'msg' => '添加失败',
+            'data' => []
+        ]);
+    }
+
+    /**
+     * @Notes:  文章编辑
+     * @param  string id
+     * @param  string title 标题
+     * @param string content 内容
+     * @return  json
+     */
+    public function articleEdit(RequsetsArticlesEdit $request)
+    {
+        $articleModel = new Article();
+        $res = $articleModel->edit($request->all());
+        if($res) {
+            return response()->json([
+                'code'=> 0,
+                'msg' => '编辑成功',
+                'data' => []
+            ]);
+        }
+        return response()->json([
+            'code'=> -1,
+            'msg' => '编辑失败',
+            'data' => []
+        ]);
     }
 
     /**
@@ -62,46 +119,5 @@ class ArticleController extends Controller
         $res = Db::table('articles')->where(['id' => $id])->delete();
         return ['id' => $res];
     }
-
-    /**
-     * @Notes:  注释
-     * @param  string or array  $data
-     * @return  mixed
-     */
-    public function acticleList()
-    {
-        return [1,2,3,4,5,6,'test' => '45678'];
-    }
-
-    /**
-     * @Notes: 文章添加
-     * @param  string id
-     * @param  string title 标题
-     * @param string content 内容
-     * @return  json
-     */
-    public function articleAdd(RequsetsArticlesAdd $request)
-    {
-
-//        return response()->getStatusCode();
-        return response()->json([
-            'code'=> 0,
-            'msg' => '添加成功',
-            'data' => []
-        ]);
-    }
-
-    /**
-     * @Notes:  文章编辑
-     * @param  string id
-     * @param  string title 标题
-     * @param string content 内容
-     * @return  json
-     */
-    public function articleEdit(RequsetsArticlesEdit $request)
-    {
-
-    }
-
 
 }
