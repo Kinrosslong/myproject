@@ -16,6 +16,6 @@
     </div>
 <script type=text/javascript src=./static/js/manifest.52daf35d3c01900a3ddf.js></script>
 <script type=text/javascript src=./static/js/vendor.d704e17647e73e432691.js></script>
-<script type=text/javascript src=./static/js/app.e9e3850d75da8ab53bee.js></script>
+<script type=text/javascript src=./static/js/app.19ff3439c7ea139a4226.js></script>
 </body>
 </html>
