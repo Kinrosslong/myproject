@@ -9,8 +9,15 @@ use App\Http\Requests\RequsetsArticlesEdit;
 use App\Http\Requests\RequsetsArticlesAdd;
 use App\Models\Article;
 
-class ArticleController extends Controller
+class ArticleController extends BaseController
 {
+
+    protected $models;
+    public function __construct(Article $models)
+    {
+//        parent::__construct(); //调用或者说继承父类的构造函数:
+        $this->models = $models;
+    }
 
     /**
      * @Notes:  文章初始化
@@ -26,22 +33,15 @@ class ArticleController extends Controller
         $selectWord = $request->input('select_word');
         $num = ($pagenum - 1) * $pagesize;
         $where = [];
-        if($selectWord) {
+        if ($selectWord) {
             $where = [
                 ['title', 'like' , $selectWord.'%']
             ];
         }
-        $articlesList = Article::where($where)
-            ->offset($num)
-            ->limit($pagesize)
-            ->orderBy('created_at', 'desc')
-            ->get(); // get 方法获取表中所有记录
-        $total = Article::where($where)->count();
-        return response()->json([
-            'code'=> 0,
-            'msg' => 'ok',
-            'data' => ['list' => $articlesList, 'total' =>   $total]
-        ]);
+
+        $articlesList = $this->models->articleList($where, $num, $pagesize);
+        $total = $this->models->articleTotal($where);
+        return $this->success(['list' => $articlesList, 'total' =>   $total]);
     }
 
 
@@ -54,20 +54,10 @@ class ArticleController extends Controller
      */
     public function articleAdd(RequsetsArticlesAdd $request)
     {
-       $models =  new Article();
-       $res = $models->add($request->all());
-       if($res) {
-           return response()->json([
-               'code'=> 0,
-               'msg' => '添加成功',
-               'data' => []
-           ]);
+       if ( $this->models->add($request->all()) ) {
+           return $this->success();
        }
-        return response()->json([
-            'code'=> -1,
-            'msg' => '添加失败',
-            'data' => []
-        ]);
+       return $this->error('文章新增失败');
     }
 
     /**
@@ -79,20 +69,10 @@ class ArticleController extends Controller
      */
     public function articleEdit(RequsetsArticlesEdit $request)
     {
-        $articleModel = new Article();
-        $res = $articleModel->edit($request->all());
-        if($res) {
-            return response()->json([
-                'code'=> 0,
-                'msg' => '编辑成功',
-                'data' => []
-            ]);
+        if ( $this->models->edit($request->all()) ) {
+            return $this->success();
         }
-        return response()->json([
-            'code'=> -1,
-            'msg' => '编辑失败',
-            'data' => []
-        ]);
+        return $this->error('文章编辑失败');
     }
 
     /**
@@ -102,18 +82,32 @@ class ArticleController extends Controller
      */
     public function articleDel(Request $request)
     {
-        $id = $request->input('id');
-        $qid = $request->query('id');
-        //        if(empty($id)) {
-        ////            return
-        //        }
-//        dump($id);
-//        dd($id);
-//        dump($qid);
-//        dd($qid);
+        $id = $request->input('id', '');
+        if (empty($id)) {
+            return $this->error('参数错误');
+        }
 
-        $res = Db::table('articles')->where(['id' => $id])->delete();
-        return ['id' => $res];
+        if( $this->models->del($id) ) {
+            return $this->success();
+        }
+        return $this->error('文章删除失败');
     }
 
+    /**
+     * @Notes:  批量删除
+     * @param  array  $ids
+     * @return  json
+     */
+    public function articleDelAll(Request $request)
+    {
+        $ids = $request->input('ids', '');
+        if (empty($ids)) {
+            return $this->error('参数错误');
+        }
+        $ids = explode(',', $ids);
+        if( $this->models->delAll($ids) ) {
+            return $this->success();
+        }
+        return $this->error('文章删除失败');
+    }
 }

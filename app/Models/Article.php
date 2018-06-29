@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class Article extends Model
 {
-
 
     /**
      * @var 绑定数据表
@@ -28,13 +26,39 @@ class Article extends Model
      * @param  string
      * @return  object
      */
-    public function findModel($id)
+    public static function findModel($id)
     {
         if (($model = Article::find($id)) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('请求文章模型不存在.');
+        throw new ModelNotFoundException('请求文章模型不存在.');
+    }
+
+    /**
+     * @Notes: 文章列表
+     * @param  array $where
+     * @return  array
+     */
+    public function articleList(array $where = [], $num = 0, $pagesize = 10)
+    {
+        $articlesList = Article::where($where)
+            ->offset($num)
+            ->limit($pagesize)
+            ->orderBy('created_at', 'desc')
+            ->get(); // get 方法获取表中所有记录
+
+        return $articlesList;
+    }
+
+    /**
+     * @Notes:  获取文章总数
+     * @param  array  $where
+     * @return  int
+     */
+    public function articleTotal(array $where = [])
+    {
+        return Article::where($where)->count();
     }
 
     /**
@@ -44,8 +68,11 @@ class Article extends Model
      */
     public function add(array $param = [])
     {
-        $models = new Article();
-        return $models->create($param);
+        try {
+            return  Article::create($param);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     /**
@@ -55,10 +82,35 @@ class Article extends Model
      */
     public function edit(array $param = [])
     {
-        $models = $this->findModel($param['id']);
-        return $models->update($param);
+        try {
+            return self::findModel($param['id'])->update($param);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 
+    /**
+     * @Notes: 根据id删除文章
+     * @param  integer
+     * @return  boolean
+     */
+    public function del($id)
+    {
+        return $this->findModel($id)->delete();
+    }
 
+    /**
+     * @Notes:  批量删除
+     * @param  array  $ids
+     * @return  boolean
+     */
+    public function delAll(array $ids = [])
+    {
+        try {
+            return Article::whereIn('id', $ids)->delete();
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
 
 }
