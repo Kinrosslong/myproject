@@ -12,7 +12,7 @@
             <span><a href="" class="blog-color">article &nbsp;</a></span>
             <span> @Kinross &nbsp;</span>
             <span>2018/5/8</span>
-            <h1><a href="">我本楚狂人，凤歌笑孔丘 祥文2018年8月26日开始学习php啦  say hello worle</a></h1>
+            <h1><a href="">我本楚狂人，凤歌笑孔丘</a></h1>
             <p>我们一直在坚持着，不是为了改变这个世界，而是希望不被这个世界所改变。
             </p>
             <p><a href="" class="blog-continue">continue reading</a></p>
