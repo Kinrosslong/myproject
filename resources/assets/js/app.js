@@ -36,6 +36,6 @@ Vue.component('my-app', require('./components/App.vue'));
 
 const app = new Vue({
     el: '#app',
-    router
+    router: router
 });
 

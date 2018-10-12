@@ -2,15 +2,15 @@ import VueRouter from 'vue-router'
 
 let routes = [
     {
-        path: '/admin/index',
+        path: '/backend/index',
         component: require('./components/pages/Home')
     },
     {
-        path: '/admin/home',
+        path: '/backend/home',
         component: require('./components/pages/Home.vue')
     },
     {
-        path: '/admin/about',
+        path: '/backend/about',
         component: require('./components/pages/About.vue')
     },
     // {
@@ -23,7 +23,7 @@ let routes = [
         component: require('./components/posts/Post.vue')
     },
     {
-        path: '/admin/regist',
+        path: '/backend/regist',
         name: 'regist',
         component: require('./components/register/Register.vue')
     },
@@ -33,7 +33,7 @@ let routes = [
     //     component: require('./components/confirm/Email')
     // },
     {
-        path: '/admin/login',
+        path: '/backend/login',
         name: 'login',
         component: require('./components/login/Login.vue')
     },

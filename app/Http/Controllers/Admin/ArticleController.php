@@ -54,6 +54,8 @@ class ArticleController extends BaseController
      */
     public function articleAdd(RequsetsArticlesAdd $request)
     {
+
+//        dd($request->all());
        if ( $this->models->add($request->all()) ) {
            return $this->success();
        }

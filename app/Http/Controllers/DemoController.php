@@ -12,7 +12,17 @@ class DemoController extends Controller
         return view('demo.demo');
     }
 
+    public function dmoe_print()
+    {
+        if(isset($arr) && count($arr) > 0) {
+            echo 132;
+        }
 
+        echo  111; echo "<br/>";
+
+
+        dump(__DIR__);
+    }
 
     /**
      * @desc 闪信通发送短信
@@ -53,6 +63,12 @@ class DemoController extends Controller
     }
 
 
+    /**
+     * @Notes:  注释
+     * Date: 2018/6/5
+     * @param  string or array  $data
+     * @return  mixed
+     */
     public function toSms()
     {
         $res = $this->sendsxtmsg('18576722109', 'this si test');
